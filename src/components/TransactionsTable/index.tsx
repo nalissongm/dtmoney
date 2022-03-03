@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { api } from "../../services/api";
 import { Container } from "./styles";
 
 interface TrasactionsProps {
@@ -14,9 +15,7 @@ export function TransactionsTable() {
   const [transactions, setTransactions] = useState<TrasactionsProps[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/trasactions")
-      .then((response) => response.json())
-      .then((data) => setTransactions(data));
+    api.get("/trasactions").then((response) => setTransactions(response.data));
   }, []);
 
   return (
